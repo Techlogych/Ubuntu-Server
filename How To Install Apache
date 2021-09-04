@@ -1,0 +1,44 @@
+#Update and upgrade the server#
+sudo apt update && sudo apt upgrade
+
+#Install Apache server#
+sudo apt install apache2
+
+#Folder for website#
+sudo mkdir /var/www/vlab.com
+
+#Setting Permissions#
+sudo chown -R $USER:$USER /var/www/your_domain
+
+sudo chmod -R 755 /var/www/your_domain
+
+#Create the index webpage#
+sudo nano /var/www/your_domain/index.html
+<html>
+    <head>
+        <title>Title of website!</title>
+    </head>
+    <body>
+        <h1>Welcome message!</h1>
+	<a>Link</a>
+    </body>
+</html>
+
+#Creates virtual host file#
+sudo nano /etc/apache2/sites-available/vlab.com.conf
+<VirtualHost *:80>
+    ServerAdmin webmaster@localhost
+    ServerName your_domain
+    ServerAlias your_domain
+    DocumentRoot /var/www/your_domain
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+
+#Enable virtual Hostfile#
+sudo a2ensite your_domain.conf
+
+#Disable Default Virtual Hostfile#
+
+#Create page 2#
+sudo nano /var/www/your_domain/page2.html
